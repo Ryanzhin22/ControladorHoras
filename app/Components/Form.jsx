@@ -6,6 +6,12 @@ function Form({ handleAdd }) {
   const [quantidadeHoras, setQuantidadeHoras] = useState(0)
   const itemId = Math.floor(Math.random() * 100000)
 
+  const handleSubmit = () => {
+    handleAdd(itemId, nomeTarefa, quantidadeHoras)
+    setNomeTarefa("")
+    setQuantidadeHoras("")
+  }
+
   return (
     <div className="w-full h-[100px] m-auto bg-white items-center justify-around flex mt-8 rounded-lg">
       <div className="inputWrapper flex flex-col justify-center">
@@ -15,6 +21,7 @@ function Form({ handleAdd }) {
           className="border-2 border-gray-300 p-1 rounded-md"
           value={nomeTarefa}
           onChange={(e) => setNomeTarefa(e.target.value)}
+          autoFocus
         />
       </div>
       <div className="inputWrapper flex flex-col justify-center">
@@ -26,7 +33,7 @@ function Form({ handleAdd }) {
           onChange={(e) => setQuantidadeHoras(e.target.value)}
         />
       </div>
-      <button className="w-[100px] h-[70px] bg-orange-400 rounded-lg text-white font-semibold tracking-wide" onClick={() => handleAdd(itemId, nomeTarefa, quantidadeHoras)}>
+      <button className="w-[100px] h-[70px] bg-orange-400 rounded-lg text-white font-semibold tracking-wide" onClick={() => handleSubmit()}>
         Enviar
       </button>
     </div>

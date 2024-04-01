@@ -29,17 +29,21 @@ export default function Home() {
   }, [tarefasList]);
 
   const handleAdd = (itemId, nomeTarefa, quantidadeHoras) => {
-    const novoItem = { itemId, nomeTarefa, quantidadeHoras };
-    const dataTarefas = localStorage.getItem("tarefasList");
-    if (dataTarefas) {
-      const tarefasListFromLocalStorage = JSON.parse(dataTarefas);
-      setTarefasList(tarefasListFromLocalStorage.concat(novoItem));
-      localStorage.setItem("tarefasList", JSON.stringify(tarefasListFromLocalStorage.concat(novoItem)));
-    } else if (!dataTarefas) {
-      setTarefasList([novoItem]);
-      localStorage.setItem("tarefasList", JSON.stringify([novoItem]));
+    if(itemId && nomeTarefa && quantidadeHoras){
+      const novoItem = { itemId, nomeTarefa, quantidadeHoras };
+      const dataTarefas = localStorage.getItem("tarefasList");
+      if (dataTarefas) {
+        const tarefasListFromLocalStorage = JSON.parse(dataTarefas);
+        setTarefasList(tarefasListFromLocalStorage.concat(novoItem));
+        localStorage.setItem("tarefasList", JSON.stringify(tarefasListFromLocalStorage.concat(novoItem)));
+      } else if (!dataTarefas) {
+        setTarefasList([novoItem]);
+        localStorage.setItem("tarefasList", JSON.stringify([novoItem]));
+      }
+    } else {
+      alert("Preencha todos os campos!")
+    };
     }
-  };
 
   const handleRemove = (id) => {
     const dataTarefas = JSON.parse(localStorage.getItem("tarefasList"))
